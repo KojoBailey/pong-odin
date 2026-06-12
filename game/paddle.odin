@@ -7,7 +7,8 @@ Paddle :: struct {
 	width, height: f32,
 	velocity: f32,
 	acceleration: f32,
-	up_key, down_key: rl.KeyboardKey
+	up_key, down_key: rl.KeyboardKey,
+	rec: rl.Rectangle,
 }
 
 make_paddle :: proc(side: Side, WIDTH: i32) -> Paddle {
@@ -35,8 +36,7 @@ make_paddle :: proc(side: Side, WIDTH: i32) -> Paddle {
 }
 
 draw_paddle :: proc(paddle: ^Paddle) {
-	rec: rl.Rectangle = {paddle.x, paddle.y, paddle.width, paddle.height}
-	rl.DrawRectangleRec(rec, rl.WHITE)
+	rl.DrawRectangleRec(paddle.rec, rl.WHITE)
 }
 
 move_paddle :: proc(paddle: ^Paddle, game: ^Game) {
@@ -56,4 +56,6 @@ move_paddle :: proc(paddle: ^Paddle, game: ^Game) {
 	if paddle.y > lower_bound {
 		paddle.y = lower_bound
 	}
+
+	paddle.rec = {paddle.x, paddle.y, paddle.width, paddle.height}
 }

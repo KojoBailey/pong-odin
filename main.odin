@@ -15,15 +15,17 @@ Side :: enum { Left, Right }
 Paddle :: struct {
 	x, y: f32,
 	width, height: f32,
-	speed: f32,
+	velocity: f32,
+	acceleration: f32,
 	up_key, down_key: rl.KeyboardKey
 }
 
 make_paddle :: proc(side: Side) -> Paddle {
 	result := Paddle {
-		width  = PADDLE_WIDTH,
-		height = PADDLE_HEIGHT,
-		speed  = 5,
+		width        = PADDLE_WIDTH,
+		height       = PADDLE_HEIGHT,
+		velocity     = 0,
+		acceleration = 1,
 	}
 
 	switch side {
@@ -48,11 +50,13 @@ draw_paddle :: proc(paddle: ^Paddle) {
 
 move_paddle :: proc(paddle: ^Paddle) {
 	if rl.IsKeyDown(paddle.up_key) {
-		paddle.y -= paddle.speed
+		paddle.velocity -= paddle.acceleration
 	}
 	if rl.IsKeyDown(paddle.down_key) {
-		paddle.y += paddle.speed
+		paddle.velocity += paddle.acceleration
 	}
+	paddle.y += paddle.velocity
+	paddle.velocity *= 0.8
 
 	if paddle.y < 0 {
 		paddle.y = 0

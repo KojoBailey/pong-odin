@@ -35,6 +35,10 @@ make_paddle :: proc(side: Side, WIDTH: i32) -> Paddle {
 	return result
 }
 
+reset_paddle :: proc(paddle: ^Paddle) {
+	paddle.velocity = 0
+}
+
 draw_paddle :: proc(paddle: ^Paddle) {
 	rl.DrawRectangleRec(paddle.rec, rl.WHITE)
 }

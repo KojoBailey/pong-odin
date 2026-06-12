@@ -8,8 +8,6 @@ SCREEN_WIDTH :: 800
 SCREEN_HEIGHT :: 450
 MARGINS :: 15
 
-Side :: enum { Left, Right }
-
 main :: proc() {
 	rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Pong")
 	defer rl.CloseWindow()

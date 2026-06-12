@@ -27,10 +27,10 @@ init :: proc(WIDTH, HEIGHT: i32) -> Game {
 
 start :: proc(game: ^Game) {
 	reset_paddle(&game.paddle_left)
-	game.paddle_left.y = f32(game.HEIGHT / 2) - game.paddle_right.height / 2
+	game.paddle_left.y = f32(game.HEIGHT / 2) - game.paddle_right.height / 2 + 20
 
 	reset_paddle(&game.paddle_right)
-	game.paddle_right.y = f32(game.HEIGHT / 2) - game.paddle_right.height / 2
+	game.paddle_right.y = f32(game.HEIGHT / 2) - game.paddle_right.height / 2 - 20
 
 	reset_ball(&game.ball)
 	game.ball.x = f32(game.WIDTH / 2) - game.ball.width / 2
